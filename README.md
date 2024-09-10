@@ -90,3 +90,31 @@ Y poner:
 # The name of the default database
 initial.dbms.default_database=telco.db
 ```
+
+## Instalar plugins
+
+Mueve el archivo JAR al directorio `plugins`.Si descargaste el archivo en tu directorio de descargas, por ejemplo, puedes moverlo de esta manera:
+
+```bash
+sudo mv /ruta/del/plugin.jar /var/lib/neo4j/plugins/
+```
+
+Modifica el archivo de configuración de Neo4j (`neo4j.conf`) para habilitar el plugin, si es necesario. Para habilitar el plugin, agrega o modifica la configuración correspondiente. Por ejemplo, para habilitar APOC:
+
+```bash
+# A comma separated list of procedures and user defined functions that are allowed
+# full access to the database through unsupported/insecure internal APIs.
+#dbms.security.procedures.unrestricted=gds.,my.extensions.example,my.procedures.
+dbms.security.procedures.unrestricted=gds.*,apoc.*
+
+# A comma separated list of procedures to be loaded by default.
+# Leaving this unconfigured will load all procedures found.
+#dbms.security.procedures.allowlist=apoc.coll.,apoc.load.,gds.*
+dbms.security.procedures.allowlist=apoc.*,gds.*
+```
+
+Guarda los cambios y reinicia Neo4j para que se cargue el plugin:
+
+```bash
+sudo systemctl restart neo4j
+```
