@@ -136,3 +136,21 @@ RETURN c, c.lon > 0 as este, c.lon < 0 as oeste
 ```
 
 
+## Ejercicio 19
+
+Se quiere calcular la distancia entre Personas que se comunicaron por llamada, segun el lugar que dijeron que residían.
+
+Para preguntar por distancia se genera un punto a partir de lon /lan y se pide distancia en KM
+
+**Solución**
+
+```sql
+MATcH   (p1: Persona)-[r1 :resideEn]->(c1 :Ciudad),
+        (p2: Persona)-[r2 :resideEn]->(c2 :Ciudad)
+WHERE    p1.ID < p2.ID 
+        AND exists( (p1)-[:registra]->(:Tel)-[:llamada]-(:Tel)-[:registra]-(p2) )
+RETURN  p1, p2, point.distance(
+            point({longitude: c1.lon, latitude: c1.lat}),  
+            point({longitude: c2.lon, latitude: c2.lat})) / 1000 as km
+```
+
