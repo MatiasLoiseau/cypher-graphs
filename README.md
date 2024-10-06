@@ -57,6 +57,8 @@ La primera vez que inicies sesión, Neo4j te pedirá que establezcas una contras
 
 #### Paso 6: Cargar la base de datos de la materia
 
+**IMPORTANTE:** Si el archivo es un dump, no colocar la palabra .dump en el comando
+
 ```bash
 sudo systemctl stop neo4j
 sudo neo4j-admin database load --verbose --from-path="/home/matias/Downloads/" telco.db
