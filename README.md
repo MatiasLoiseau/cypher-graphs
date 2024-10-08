@@ -120,3 +120,13 @@ Guarda los cambios y reinicia Neo4j para que se cargue el plugin:
 ```bash
 sudo systemctl restart neo4j
 ```
+
+## Importar archivos csv
+
+Para importar hay que copiar el archivo en la carpeta import y luego darle permisos
+
+```bash
+sudo cp reviews_sin_duplicados.csv /var/lib/neo4j/import/
+sudo chown -R neo4j:neo4j /var/lib/neo4j/import/reviews_sin_duplicados.csv
+sudo chmod -R 755 /var/lib/neo4j/import/reviews_sin_duplicados.csv
+```
