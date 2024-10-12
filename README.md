@@ -130,3 +130,17 @@ sudo cp reviews_sin_duplicados.csv /var/lib/neo4j/import/
 sudo chown -R neo4j:neo4j /var/lib/neo4j/import/reviews_sin_duplicados.csv
 sudo chmod -R 755 /var/lib/neo4j/import/reviews_sin_duplicados.csv
 ```
+
+## Aumentar configuración de uso de memoria RAM
+
+Algunas queries pueden ser muy pesadas, para eso es recomendable modificar los siguientes parámtros en el archivo neo4j.conf con lo máximo de memoria que les permita la PC. Atentos que esto es solo recomendable para cuando vayan a usar neo4j ya que este va a reservar dicha memoria para su propio uso.
+
+En mi caso tengo 32GB de memoria RAM entonces le puedo poner la siguiente configuración:
+
+```
+server.memory.heap.initial_size=12g
+server.memory.heap.max_size=12g
+server.memory.pagecache.size=10g
+dbms.memory.transaction.total.max=9g
+db.memory.transaction.max=12g
+```
